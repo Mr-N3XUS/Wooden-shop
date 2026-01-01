@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="آرکان - مبلمان چوبی دست‌ساز لوکس و شاد">
+  <meta name="keywords" content="آرکان, مبلمان چوبی, دکوراسیون لوکس, راکینگ‌چر, میز ناهارخوری">
+  <meta name="author" content="Arkan">
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="_GtKxBx-UDgvmOaGZweUjoKuvEQqc6TiRB74B1sfV-Q" />
+  <title>آرکان - چوب‌هایی با حس لوکس!</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">آرکان</div>
+      <nav>
+        <a href="#home">خانه</a>
+        <a href="#products">محصولات</a>
+        <a href="#gallery">گالری</a>
+        <a href="#contact">تماس</a>
+        <a href="#" onclick="openAdminProductModal()">مدیریت محصولات</a>
+      </nav>
+    </div>
+  </header>
+  <div class="hero" id="home">
+    <div class="hero-content">
+      <h1>آرکان، چوب‌هایی با حس لوکس!</h1>
+      <p>مبلمان دست‌ساز برای فضاهای گرم و شاد</p>
+      <button onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">شروع حس لوکس</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section category-section">
+      <h2>دسته‌بندی‌های لوکس</h2>
+      <div class="category-slider" id="categorySlider">
+        <div class="category-card" onclick="filterByCategory('table')">
+          <img loading="lazy" src="https://statics.basalam.com/public-7/users/JyPw2/2109/Y4jX0yYAAdn2WEriuUP66rgE7r1zBXoPjU9jv1T2.jpg" alt="میز">
+          <h3>میز</h3>
+        </div>
+        <div class="category-card" onclick="filterByCategory('chair')">
+          <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpqDqOvjxcpA3GMzWm8gAlJvEKERStT4qmA&s" alt="صندلی">
+          <h3>صندلی</h3>
+        </div>
+        <div class="category-card" onclick="filterByCategory('sofa')">
+          <img loading="lazy" src="https://statics.basalam.com/public-4/users/XwR1o/2106/gF9FDxcKxZnsv9XV5pUUN55a4mpH00KoDTKBGfuS.jpeg_800X800X70.jpeg" alt="مبل">
+          <h3>مبل</h3>
+        </div>
+        <div class="category-card" onclick="filterByCategory('hanger')">
+          <img loading="lazy" src="https://image.torob.com/base/images/Px/zL/PxzLhH967of7co-Q.jpg_/560x560.webp" alt="رخت‌آویز">
+          <h3>رخت‌آویز</h3>
+        </div>
+        <div class="category-card" onclick="filterByCategory('rocking')">
+          <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AP1PNvnSmR_ECIx1U1NMn9se9AmUXoIJpw&s" alt="راکینگ‌چر">
+          <h3>راکینگ‌چر</h3>
+        </div>
+      </div>
+      <div class="slider-nav">
+        <button onclick="scrollSlider('categorySlider', -300)">←</button>
+        <button onclick="scrollSlider('categorySlider', 300)">→</button>
+      </div>
+    </div>
+    <div id="products" class="section">
+      <h2>محصولات لوکس</h2>
+      <div class="filter-bar">
+        <input type="text" id="search" placeholder="جستجوی محصول..." oninput="filterProducts()">
+        <select id="category" onchange="filterProducts()">
+          <option value="all">همه دسته‌ها</option>
+          <option value="table">میز</option>
+          <option value="chair">صندلی</option>
+          <option value="sofa">مبل</option>
+          <option value="hanger">رخت‌آویز</option>
+          <option value="rocking">راکینگ‌چر</option>
+        </select>
+      </div>
+      <div class="products" id="productList"></div>
+      <div class="reviews">
+        <h2>حس مشتریان</h2>
+        <div class="review-popup" id="reviewList"></div>
+        <div class="review-form">
+          <h3>حس تو چیه؟</h3>
+          <div class="form-group">
+            <select id="reviewProduct" required>
+              <option value="">انتخاب محصول</option>
+              <option value="میز ناهارخوری راش">میز ناهارخوری راش</option>
+              <option value="صندلی راحتی گردو">صندلی راحتی گردو</option>
+              <option value="مبل ست 7 نفره">مبل ست 7 نفره</option>
+              <option value="رخت‌آویز دیواری">رخت‌آویز دیواری</option>
+              <option value="راکینگ‌چر کلاسیک">راکینگ‌چر کلاسیک</option>
+            </select>
+            <label>محصول</label>
+            <div class="error-message" id="reviewProductError">لطفاً محصول را انتخاب کنید</div>
+          </div>
+          <div class="form-group">
+            <div class="emoji-slider">
+              <input type="range" min="1" max="5" value="3" id="reviewRating">
+              <span class="emoji" id="emojiDisplay">😊</span>
+            </div>
+            <div class="error-message" id="reviewRatingError">لطفاً امتیاز دهید</div>
+          </div>
+          <div class="form-group">
+            <textarea id="reviewComment" placeholder="حس تو چیه؟" rows="4" required></textarea>
+            <label>حس</label>
+            <div class="error-message" id="reviewCommentError">لطفاً حس خود را بنویسید</div>
+          </div>
+          <button onclick="submitReview()">بگو!</button>
+        </div>
+      </div>
+    </div>
+    <div id="gallery" class="section gallery-section">
+      <h2>گالری لوکس</h2>
+      <div class="gallery" id="gallerySlider">
+        <div class="gallery-item">
+          <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpqDqOvjxcpA3GMzWm8gAlJvEKERStT4qmA&s" alt="دکوراسیون">
+          <div class="story">دکوراسیونی که حس لوکس می‌ده!</div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0AP1PNvnSmR_ECIx1U1NMn9se9AmUXoIJpw&s" alt="راکینگ‌چر">
+          <div class="story">راکینگ‌چری که پر از حسه!</div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="https://statics.basalam.com/public-7/users/JyPw2/2109/Y4jX0yYAAdn2WEriuUP66rgE7r1zBXoPjU9jv1T2.jpg" alt="میز">
+          <div class="story">میزی پر از حس لوکس!</div>
+        </div>
+        <div class="gallery-item">
+          <img loading="lazy" src="https://statics.basalam.com/public-4/users/XwR1o/2106/gF9FDxcKxZnsv9XV5pUUN55a4mpH00KoDTKBGfuS.jpeg_800X800X70.jpeg" alt="مبل">
+          <div class="story">مبلی که غوغا می‌کنه!</div>
+        </div>
+      </div>
+      <div class="slider-nav">
+        <button onclick="scrollSlider('gallerySlider', -300)">←</button>
+        <button onclick="scrollSlider('gallerySlider', 300)">→</button>
+      </div>
+    </div>
+    <div id="contact" class="section">
+      <h2>با آرکان هم‌حس شو!</h2>
+      <div class="contact-section">
+        <p>بیا تو حس ماجرا:</p>
+        <div class="contact-bubbles">
+          <a href="tel:+982112345678">📞</a>
+          <a href="mailto:info@arkan.com">✉️</a>
+          <a href="https://wa.me/+989123456789" target="_blank">💬</a>
+          <a href="https://t.me/+989123456789" target="_blank">📱</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="inspiration-btn" onclick="showInspiration()">🌟</button>
+  <div class="modal" id="adminProductModal">
+    <div class="modal-content admin-modal">
+      <button class="close-modal" onclick="closeAdminProductModal()">✕</button>
+      <h3>مدیریت محصولات</h3>
+      <div class="form-group">
+        <input type="password" id="adminProductPassword" placeholder="رمز ادمین" required>
+        <label>رمز</label>
+        <div class="error-message" id="adminProductPasswordError">لطفاً رمز را وارد کنید</div>
+      </div>
+      <button onclick="loginAdminProducts()">ورود</button>
+      <div id="adminProductContent" style="display: none;">
+        <h3>لیست محصولات</h3>
+        <div class="admin-products" id="adminProductList"></div>
+        <h3>افزودن محصول جدید</h3>
+        <div class="form-group">
+          <input type="text" id="newProductName" placeholder="نام محصول" required>
+          <label>نام محصول</label>
+        </div>
+        <div class="form-group">
+          <select id="newProductCategory" required>
+            <option value="">انتخاب دسته</option>
+            <option value="table">میز</option>
+            <option value="chair">صندلی</option>
+            <option value="sofa">مبل</option>
+            <option value="hanger">رخت‌آویز</option>
+            <option value="rocking">راکینگ‌چر</option>
+          </select>
+          <label>دسته</label>
+        </div>
+        <div class="form-group">
+          <input type="number" id="newProductPrice" placeholder="قیمت (تومان)" required>
+          <label>قیمت</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="newProductImage" placeholder="مثال: https://images.unsplash.com/..." required autocomplete="off" autocorrect="off">
+          <label>URL عکس</label>
+          <span class="url-help">لینک عکس رو از Unsplash یا Google کپی کنید</span>
+        </div>
+        <button onclick="addProduct()">افزودن محصول</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="editProductModal">
+    <div class="modal-content admin-modal">
+      <button class="close-modal" onclick="closeEditProductModal()">✕</button>
+      <h3>ویرایش محصول</h3>
+      <div class="form-group">
+        <input type="text" id="editProductName" placeholder="نام محصول" required>
+        <label>نام محصول</label>
+      </div>
+      <div class="form-group">
+        <select id="editProductCategory" required>
+          <option value="">انتخاب دسته</option>
+          <option value="table">میز</option>
+          <option value="chair">صندلی</option>
+          <option value="sofa">مبل</option>
+          <option value="hanger">رخت‌آویز</option>
+          <option value="rocking">راکینگ‌چر</option>
+        </select>
+        <label>دسته</label>
+      </div>
+      <div class="form-group">
+        <input type="number" id="editProductPrice" placeholder="قیمت (تومان)" required>
+        <label>قیمت</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="editProductImage" placeholder="مثال: https://images.unsplash.com/..." required autocomplete="off" autocorrect="off">
+        <label>URL عکس</label>
+        <span class="url-help">لینک عکس رو از Unsplash یا Google کپی کنید</span>
+      </div>
+      <button onclick="saveProductEdit()">ذخیره تغییرات</button>
+    </div>
+  </div>
+  <div class="modal" id="inspirationModal">
+    <div class="inspiration-content">
+      <button class="close-modal" onclick="closeInspiration()">✕</button>
+      <h3>حس‌های الهام‌بخش!</h3>
+      <p id="inspirationText"></p>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 آرکان - چوب‌هایی با حس لوکس! تمامی حقوق محفوظ است.</p>
+    <p>تماس: <a href="tel:+982112345678">021-12345678</a> | ایمیل: <a href="mailto:info@arkan.com">info@arkan.com</a></p>
+    <p>آدرس: تهران، خیابان ولیعصر، پلاک 123</p>
+  </footer>
+
+</body>
+</html>
